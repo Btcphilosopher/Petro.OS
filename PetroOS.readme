@@ -1,0 +1,932 @@
+PetroOS
+A Real-Time Computational Infrastructure Platform for Oil & Gas Operations
+
+PetroOS is a proposed software architecture for the continuous observation, modelling, simulation and optimisation of oil and gas assets.
+
+The system is conceived as a computational layer connecting field instrumentation, wells, gathering systems, pipelines, processing facilities and engineering analytics into a unified operational data environment.
+
+Its core architecture separates three functions:
+
+Rust — high-performance industrial telemetry and edge processing
+Python — analytics, simulation, optimisation and forecasting
+Kotlin — real-time engineering interface and operational visualisation
+
+The central proposition is that oil and gas infrastructure should increasingly be represented as a continuously observed cyber-physical system, in which physical assets, operational telemetry, engineering models and economic variables are computationally related.
+
+This is particularly relevant to an industry in which SCADA, distributed control systems and other operational-technology systems already provide extensive monitoring and control capabilities across geographically distributed assets. NIST explicitly identifies oil and natural-gas pipelines among major applications of SCADA and emphasises the distinctive reliability, safety and cybersecurity requirements of operational technology.
+
+1. Executive Thesis
+
+Modern petroleum operations generate extremely large volumes of time-series information.
+
+A producing asset may simultaneously generate measurements concerning:
+
+Wellhead pressure
+Bottom-hole pressure
+Flow rates
+Temperature
+Choke position
+Pump performance
+Artificial-lift parameters
+Vibration
+Pipeline pressure
+Pipeline flow
+Tank levels
+Compressor state
+Separator conditions
+Water production
+Gas composition
+Equipment health
+Energy consumption
+
+Yet the fundamental engineering problem is not simply the acquisition of these measurements.
+
+It is their integration into a coherent computational representation of the physical asset.
+
+PetroOS proposes:
+
+FIELD INSTRUMENTATION
+        ↓
+REAL-TIME TELEMETRY
+        ↓
+ASSET STATE
+        ↓
+DIGITAL MODEL
+        ↓
+ANALYTICS / SIMULATION
+        ↓
+OPTIMISATION
+        ↓
+ENGINEERING DECISION
+
+The objective is therefore to evolve from:
+
+monitoring an oilfield
+
+toward:
+
+computing the state of an oilfield.
+
+2. The Problem
+
+Oil and gas infrastructure is inherently distributed.
+
+A single operational system may span:
+
+WELLS
+  ↓
+GATHERING SYSTEM
+  ↓
+SEPARATION
+  ↓
+PROCESSING
+  ↓
+STORAGE
+  ↓
+PIPELINE
+  ↓
+EXPORT
+
+These assets operate under changing physical conditions and are exposed to:
+
+Reservoir uncertainty
+Equipment degradation
+Pressure changes
+Flow instability
+Temperature variation
+Water production
+Corrosion
+Mechanical failure
+Energy constraints
+Weather
+Network disruption
+
+The computational challenge is therefore one of state estimation under uncertainty.
+
+3. PetroOS Architecture
+                         PETROOS
+                            │
+          ┌─────────────────┼─────────────────┐
+          ↓                 ↓                 ↓
+      INDUSTRIAL         GEOLOGICAL        ECONOMIC
+        DATA               DATA              DATA
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            ↓
+                     DIGITAL ASSET
+                            │
+              ┌─────────────┼─────────────┐
+              ↓             ↓             ↓
+          SIMULATION     ANALYTICS    OPTIMISATION
+              │             │             │
+              └─────────────┼─────────────┘
+                            ↓
+                     ENGINEERING
+                       DECISION
+
+PetroOS is not intended to replace existing DCS, SCADA or certified safety systems.
+
+Rather, it operates as an integration and intelligence layer above the industrial control environment.
+
+4. Rust — Industrial Telemetry Engine
+
+Rust forms the real-time computational substrate.
+
+SENSORS
+   ↓
+RTU / PLC / DCS / SCADA
+   ↓
+RUST EDGE ENGINE
+   ↓
+VALIDATION
+   ↓
+NORMALISATION
+   ↓
+EVENT STREAM
+   ↓
+PETROOS
+
+The Rust layer provides:
+
+High-throughput telemetry ingestion
+Low-latency processing
+Sensor validation
+Timestamping
+Data-quality classification
+Local buffering
+Protocol adaptation
+Event generation
+Edge analytics
+Real-time streaming
+
+Potential interfaces include appropriate implementations of:
+
+OPC UA
+MQTT
+Modbus
+Industrial Ethernet
+REST/gRPC
+Vendor-specific APIs
+
+Industrial environments commonly contain heterogeneous protocols and interfaces; NIST documentation specifically discusses technologies including Modbus, HART, PROFIBUS and OPC UA within industrial environments.
+
+5. Python — Petroleum Analytics Engine
+
+Python provides the analytical layer.
+
+Its responsibilities include:
+
+Production forecasting
+Well-performance modelling
+Reservoir analytics
+Artificial-lift optimisation
+Equipment health modelling
+Anomaly detection
+Flow analysis
+Energy optimisation
+Maintenance forecasting
+Scenario simulation
+Economic optimisation
+
+The computational architecture becomes:
+
+TELEMETRY
+    ↓
+STATE ESTIMATION
+    ↓
+ANALYTICAL MODEL
+    ↓
+SIMULATION
+    ↓
+OPTIMISATION
+    ↓
+RECOMMENDATION
+
+The system should favour transparent engineering models where possible, introducing machine learning when sufficient validated data exists.
+
+6. Kotlin — Operational Engineering Interface
+
+Kotlin provides the real-time operational environment.
+
+The interface is intended for:
+
+Control rooms
+Petroleum engineers
+Production engineers
+Reliability engineers
+Asset managers
+Field operators
+Executive operations centres
+
+A conceptual dashboard:
+
+PETROOS
+
+FIELD: NORTH BASIN
+
+ACTIVE WELLS             184
+PRODUCTION               84,200 BOPD
+GAS                      212 MMSCFD
+WATER                    31,400 BWPD
+
+ACTIVE ALERTS             07
+
+NETWORK                   HEALTHY
+
+FIELD STATUS              ● NORMAL
+
+The objective is high information density without unnecessary visual complexity.
+
+7. Digital Oilfield
+
+The central abstraction is the Digital Oilfield.
+
+FIELD
+│
+├── WELLS
+│   ├── WELLHEAD
+│   ├── DOWNHOLE
+│   ├── ARTIFICIAL LIFT
+│   └── PRODUCTION
+│
+├── FACILITIES
+│   ├── SEPARATORS
+│   ├── COMPRESSORS
+│   ├── PUMPS
+│   └── STORAGE
+│
+├── PIPELINES
+│
+├── INSTRUMENTATION
+│
+└── ENVIRONMENT
+
+Every asset has:
+
+Persistent identity
+Location
+Current state
+Historical state
+Telemetry
+Maintenance history
+Operational constraints
+Engineering metadata
+
+The result is a persistent computational representation of the field.
+
+8. Well Telemetry
+
+PetroOS should provide a unified well model.
+
+Example:
+
+WELL-184
+
+PRESSURE
+2,841 psi
+
+TEMPERATURE
+86°C
+
+OIL
+612 BOPD
+
+GAS
+1.8 MMSCFD
+
+WATER
+148 BWPD
+
+CHOKE
+42%
+
+ESP
+3,210 RPM
+
+HEALTH
+92 / 100
+
+Historical and real-time values can be combined to identify changes in operating behaviour.
+
+9. Production Optimisation
+
+Production can be represented as a constrained optimisation problem.
+
+Conceptually:
+
+MAXIMISE
+
+    Hydrocarbon Recovery
+
+SUBJECT TO
+
+    Reservoir constraints
+    Well constraints
+    Pressure constraints
+    Equipment constraints
+    Facility capacity
+    Energy consumption
+    Water handling
+    Safety limits
+
+This allows PetroOS to evaluate scenarios rather than merely report current conditions.
+
+For example:
+
+SCENARIO A
+Increase Well 184 choke
+
+Production:
++420 BOPD
+
+Energy:
++2.1%
+
+Pressure margin:
+-4%
+
+Risk:
+MODERATE
+
+The system presents the engineering consequences rather than automatically changing the physical system.
+
+10. Artificial-Lift Intelligence
+
+PetroOS can model:
+
+ESPs
+Gas lift
+Rod pumps
+Hydraulic pumps
+
+and analyse:
+
+PRESSURE
+   +
+FLOW
+   +
+RPM
+   +
+POWER
+   +
+VIBRATION
+   ↓
+LIFT PERFORMANCE
+
+Potential outputs include:
+
+Efficiency
+Energy consumption
+Production response
+Anomaly detection
+Maintenance probability
+Recommended operating envelope
+11. Pipeline Monitoring
+
+The same architecture extends downstream.
+
+WELL
+ ↓
+GATHERING
+ ↓
+PIPELINE
+ ↓
+PROCESSING
+ ↓
+EXPORT
+
+Monitor:
+
+Pressure
+Flow
+Temperature
+Valve state
+Pump state
+Compressor state
+Vibration
+Throughput
+Line-pack estimates
+
+The system can identify deviations from expected operating states.
+
+12. Equipment Intelligence
+
+PetroOS maintains computational health models for:
+
+Pumps
+Compressors
+Turbines
+Motors
+Valves
+Separators
+Heat exchangers
+Compressors
+Generators
+
+A conceptual health model:
+
+VIBRATION
+   +
+TEMPERATURE
+   +
+PRESSURE
+   +
+POWER
+   +
+OPERATING HOURS
+   ↓
+ASSET HEALTH
+   ↓
+ANOMALY DETECTION
+   ↓
+MAINTENANCE FORECAST
+
+The system should distinguish between:
+
+observed failure indicators
+
+and
+
+statistical predictions.
+
+This prevents probabilistic outputs from being represented as engineering certainty.
+
+13. Real-Time Event Architecture
+
+Every significant change becomes an event.
+
+WELL_STARTED
+WELL_STOPPED
+PRESSURE_CHANGE
+FLOW_ANOMALY
+HIGH_TEMPERATURE
+VIBRATION_WARNING
+PUMP_FAILURE
+PIPELINE_ALERT
+COMMUNICATION_LOSS
+MAINTENANCE_REQUIRED
+PRODUCTION_CHANGE
+
+Events should be immutable, timestamped and traceable to their source.
+
+This creates a machine-readable history of field operations.
+
+14. Data Quality
+
+PetroOS treats telemetry provenance as a first-class engineering property.
+
+Every measurement should contain:
+
+SOURCE
+TIMESTAMP
+ASSET
+SENSOR
+VALUE
+UNIT
+QUALITY
+SEQUENCE
+
+Possible states:
+
+VALID
+SUSPECT
+INVALID
+STALE
+DISCONNECTED
+SIMULATED
+
+This prevents downstream analytics from treating missing or corrupted data as genuine observations.
+
+15. Edge Computing
+
+PetroOS is deliberately designed for edge-first operation.
+
+FIELD
+ │
+ ├── LOCAL TELEMETRY
+ ├── LOCAL BUFFER
+ ├── LOCAL VALIDATION
+ └── LOCAL EVENT PROCESSING
+          ↓
+       NETWORK
+          ↓
+      CENTRAL SYSTEM
+
+This matters because oil and gas assets may be geographically remote and dependent upon communications infrastructure that cannot be assumed to have continuous availability.
+
+The architecture should therefore degrade gracefully rather than becoming unusable whenever a cloud connection disappears.
+
+16. Cybersecurity
+
+Oil and gas operations constitute operational technology environments in which availability, integrity and safety have materially different requirements from conventional IT systems.
+
+NIST specifically identifies oil and natural gas as major ICS environments and emphasises asset inventory, monitoring and management as components of OT cybersecurity.
+
+PetroOS therefore adopts:
+
+FIELD NETWORK
+     │
+     ↓
+SECURE EDGE
+     │
+     ↓
+DATA DIODES / CONTROLLED GATEWAYS
+     │
+     ↓
+PETROOS
+
+Security capabilities should include:
+
+Mutual authentication
+Encryption
+Certificate management
+Role-based access control
+Audit logs
+Asset inventory
+Network monitoring
+Anomaly detection
+Secure software updates
+Credential management
+
+CISA guidance for ICS/OT monitoring likewise emphasises asset discovery, protocol-aware monitoring and behavioural baselines.
+
+17. Safety Boundary
+
+PetroOS is explicitly not a replacement for safety-instrumented systems, PLCs, DCS or certified emergency-control infrastructure.
+
+The architecture is:
+
+PETROOS
+   │
+   │ OBSERVES / ANALYSES
+   ↓
+SCADA / DCS / PLC
+   │
+   │ CERTIFIED CONTROL
+   ↓
+PHYSICAL ASSET
+
+PetroOS should not:
+
+Disable safety interlocks
+Override emergency shutdown systems
+Modify certified safety limits
+Directly control critical equipment without an appropriately engineered control layer
+Represent predictions as deterministic safety decisions
+
+This separation is fundamental to the system architecture.
+
+18. Simulation
+
+A complete virtual oilfield should be available before physical deployment.
+
+VIRTUAL FIELD
+      ↓
+VIRTUAL WELLS
+      ↓
+VIRTUAL TELEMETRY
+      ↓
+RUST
+      ↓
+PYTHON
+      ↓
+KOTLIN
+
+Simulation scenarios could include:
+
+Production decline
+Pump degradation
+Pressure changes
+Water breakthrough
+Compressor failure
+Pipeline restriction
+Sensor failure
+Communication loss
+Facility bottlenecks
+
+This creates a controlled environment for validating analytical models.
+
+19. Digital Twin Feedback Loop
+
+The long-term computational model is:
+
+PHYSICAL FIELD
+      ↓
+OBSERVATION
+      ↓
+DIGITAL TWIN
+      ↓
+SIMULATION
+      ↓
+PREDICTION
+      ↓
+OBSERVATION
+      ↓
+MODEL UPDATE
+
+The digital twin consequently becomes a continuously updated engineering hypothesis about the physical asset.
+
+This is more significant than a conventional dashboard because it enables counterfactual computation:
+
+What would happen if the operating conditions changed?
+
+20. Energy Optimisation
+
+PetroOS should model energy as an explicit operational variable.
+
+Track:
+
+Pump energy
+Compressor energy
+Artificial-lift energy
+Processing energy
+Water handling
+Gas compression
+Facility consumption
+
+Then calculate:
+
+ENERGY / BARREL
+ENERGY / UNIT PRODUCTION
+EQUIPMENT EFFICIENCY
+FIELD ENERGY INTENSITY
+
+The resulting system can evaluate production decisions against their energy consequences.
+
+21. Commercial Proposition
+
+Potential customers include:
+
+Independent oil producers
+International oil companies
+National oil companies
+Oilfield-service companies
+Pipeline operators
+Midstream operators
+Refiners
+Petrochemical companies
+Offshore operators
+Engineering firms
+
+The initial commercial wedge could be a real-time telemetry and asset-intelligence platform, with progressively higher-value analytical modules introduced thereafter.
+
+22. Potential Revenue Architecture
+Platform
+
+Enterprise licence for the PetroOS operational data platform.
+
+Edge
+
+Per-site or per-asset telemetry deployment.
+
+Analytics
+
+Premium modules for:
+
+Production optimisation
+Predictive maintenance
+Energy optimisation
+Artificial-lift optimisation
+Pipeline analytics
+Digital Twin
+
+Long-duration asset modelling and engineering services.
+
+Enterprise
+
+Multi-field deployment and centralised fleet/asset intelligence.
+
+23. Strategic Market Context
+
+The broader direction of travel is already visible in the energy sector.
+
+In August 2026, the U.S. Department of Energy announced funding aimed at digital technologies, smart-facility concepts and advanced analytics for upstream and midstream oil and natural gas, explicitly identifying continuous monitoring, AI-supported digital twins and infrastructure optimisation as areas for development.
+
+This is significant because it suggests that the underlying technological transition is not merely theoretical: digitalisation, continuous monitoring and computational optimisation are increasingly being treated as strategic infrastructure capabilities within the energy sector.
+
+24. Differentiation
+
+PetroOS should not be positioned as:
+
+A generic IoT platform
+A conventional SCADA replacement
+A business intelligence dashboard
+A generic AI platform
+A cloud data warehouse
+
+Its proposed differentiation is the integration of:
+
+REAL-TIME OT DATA
+        +
+PETROLEUM ENGINEERING
+        +
+DIGITAL TWINS
+        +
+SIMULATION
+        +
+OPTIMISATION
+        +
+ASSET ECONOMICS
+
+The objective is a vertical computational platform specifically designed around the physical and mathematical structure of petroleum assets.
+
+25. Technical Architecture
+PetroOS
+│
+├── Rust
+│   ├── Telemetry
+│   ├── Edge Processing
+│   ├── Protocol Adapters
+│   ├── Validation
+│   └── Event Streaming
+│
+├── Python
+│   ├── Analytics
+│   ├── Simulation
+│   ├── Optimisation
+│   ├── Forecasting
+│   └── Digital Twin
+│
+├── Kotlin
+│   ├── Operations Dashboard
+│   ├── Asset Visualisation
+│   ├── Alerts
+│   └── Engineering Interface
+│
+├── PostgreSQL / Time-Series Storage
+│
+└── Digital Oilfield Model
+26. Development Roadmap
+Phase I — Telemetry
+Rust ingestion engine
+Sensor schemas
+Industrial protocol adapters
+Event system
+Local buffering
+Real-time streaming
+Phase II — Digital Field
+Well models
+Facility models
+Pipeline models
+Asset hierarchy
+Historical telemetry
+Phase III — Analytics
+Production forecasting
+Asset health
+Anomaly detection
+Energy analysis
+Phase IV — Simulation
+Virtual wells
+Production scenarios
+Equipment models
+Field-level simulation
+Phase V — Optimisation
+Production optimisation
+Artificial-lift optimisation
+Energy optimisation
+Maintenance optimisation
+Phase VI — Enterprise
+Multi-field deployment
+Fleet management
+Central analytics
+Cross-asset benchmarking
+27. Investment Thesis
+
+PetroOS is based upon a relatively simple proposition:
+
+The next generation of oil and gas software will increasingly be defined by its ability to compute the physical state of the asset in real time.
+
+The value chain becomes:
+
+RAW TELEMETRY
+       ↓
+TRUSTED DATA
+       ↓
+ASSET STATE
+       ↓
+DIGITAL TWIN
+       ↓
+SIMULATION
+       ↓
+PREDICTION
+       ↓
+OPTIMISATION
+       ↓
+ECONOMIC DECISION
+
+The strategic opportunity lies in occupying the layer between industrial reality and computational intelligence.
+
+Rather than building another application around oil and gas, PetroOS proposes a reusable computational substrate upon which numerous applications can operate.
+
+28. Principal Risks
+
+The principal technical and commercial risks include:
+
+Proprietary industrial interfaces
+Sensor-quality variability
+Incomplete historical datasets
+Model calibration
+Geological uncertainty
+False positives
+Cybersecurity
+Remote-site connectivity
+Customer integration costs
+Regulatory requirements
+Safety validation
+Long enterprise sales cycles
+
+These risks are not incidental. They constitute central engineering problems within the product itself.
+
+Accordingly, PetroOS should follow:
+
+instrument → validate → model → test → deploy → measure → improve.
+
+29. Development Status
+
+Important: PetroOS is an architectural and software-development concept unless individual components are explicitly identified in this repository as implemented and validated.
+
+The system should not be represented as:
+
+A certified industrial-control system
+A safety-instrumented system
+A certified autonomous production platform
+A validated reservoir simulator
+A guaranteed predictive-maintenance system
+
+Those capabilities require independent engineering validation, field trials, cybersecurity assessment and appropriate regulatory/certification processes.
+
+30. Long-Term Vision
+
+The long-term objective is to make the oilfield computationally legible.
+
+THE PHYSICAL FIELD
+        ↕
+THE DIGITAL FIELD
+        ↕
+THE COMPUTATIONAL MODEL
+        ↕
+THE ENGINEERING DECISION
+
+A mature PetroOS deployment could ultimately provide a continuous computational representation spanning:
+
+RESERVOIR
+   ↓
+WELL
+   ↓
+GATHERING
+   ↓
+PROCESSING
+   ↓
+PIPELINE
+   ↓
+STORAGE
+   ↓
+EXPORT
+
+The resulting platform would transform operational software from a system that primarily records what happened into one capable of modelling:
+
+what is happening, why it is happening, what may happen next, and what alternative actions could produce different outcomes.
+
+31. Conclusion
+
+PetroOS proposes a computational architecture for the increasingly instrumented oil and gas industry.
+
+Its premise is that the industrial value of telemetry increases substantially when measurements cease to exist as isolated time series and become components of an integrated physical model.
+
+              PETROOS
+                 │
+      ┌──────────┼──────────┐
+      ↓          ↓          ↓
+   TELEMETRY   MODELS    ECONOMICS
+      │          │          │
+      └──────────┼──────────┘
+                 ↓
+          DIGITAL OILFIELD
+                 │
+       ┌─────────┼─────────┐
+       ↓         ↓         ↓
+   SIMULATE   ANALYSE   OPTIMISE
+       │         │         │
+       └─────────┼─────────┘
+                 ↓
+          ENGINEERING
+            DECISION
+
+Rust supplies the industrial nervous system.
+
+Python supplies the analytical intelligence.
+
+Kotlin supplies the operational interface.
+
+The digital twin supplies the unifying computational model.
+
+Together, they constitute the proposed PetroOS architecture: a real-time operating and intelligence layer for oil and gas infrastructure.
+
+Technical References
+NIST SP 800-82 Rev. 3 — Guide to Operational Technology (OT) Security. Establishes the security context for OT, including ICS, SCADA, DCS and PLC environments, while addressing their distinctive performance, reliability and safety requirements.
+NIST SP 1800-23 — Energy Sector Asset Management. Specifically addresses asset management and monitoring in electric utilities and the oil and gas industry, emphasising accurate OT asset inventories and continuous monitoring.
+CISA — ICS/OT Cybersecurity Monitoring Technology Considerations. Addresses asset discovery, ICS-protocol-aware monitoring, behavioural baselines and alignment with established OT cybersecurity frameworks.
+U.S. Department of Energy — 2026 oil and natural gas technology programme. Identifies digitalisation, continuous monitoring, AI-supported digital twins and infrastructure optimisation as areas for technological development in upstream and midstream operations.
+NIST OT/SCADA guidance. Documents the role of SCADA in distributed oil and natural gas pipeline systems and centralised near-real-time monitoring.
+
+Investment disclaimer: This document describes a proposed technical architecture and commercial thesis. It does not constitute an offer of securities, financial advice, or a representation of current commercial performance. Any investment decision should be based upon independently verified technical demonstrations, intellectual-property assessment, customer validation, cybersecurity assessment, regulatory analysis and financial due diligence.
